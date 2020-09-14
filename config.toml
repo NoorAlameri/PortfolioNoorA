@@ -211,9 +211,9 @@ disqusShortname = ""
       label = "GitHub"
 
     [[params.footer.social]]
-      #icon = "fa-linkedin"
-      #url= "https://www.linkedin.com/nooralameri"
-      #label = "LinkedIn"
+      icon = "fa-linkedin"
+      url= "https://www.linkedin.com/nooralameri"
+      label = "LinkedIn"
 
     [[params.footer.quicklinks]]
       text = "Design: "
