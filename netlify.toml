@@ -20,7 +20,7 @@
 
 [context.deploy-preview.environment]
 <<<<<<< HEAD
-  HUGO_VERSION = "0.74.3"
+  blogHUGO_VERSION = "0.74.3"
   
 =======
   HUGO_VERSION = "0.74.3"
