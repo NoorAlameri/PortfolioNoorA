@@ -92,8 +92,8 @@ disqusShortname = ""
     # Display your showcases here.
     
     [[params.tiles.showcase]]
-      title = "NYT MAsks"
-      subtitle = "NYT masks in people"
+      title = "HR analytics"
+      subtitle = "Analysis of data and regression to predict monthly income"
       image = "pic01.jpg"
       url = "blogs/blog5"
 

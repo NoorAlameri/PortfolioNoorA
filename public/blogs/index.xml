@@ -21,6 +21,17 @@
     </item>
     
     <item>
+      <title>HR analytics</title>
+      <link>/blogs/blog5/</link>
+      <pubDate>Tue, 31 Oct 2017 22:42:51 -0500</pubDate>
+      
+      <guid>/blogs/blog5/</guid>
+      <description>For this analysis, I have taken a data set on Human Resrouce Analytics from the IBM HR Analytics Employee Attrition &amp;amp; Performance data set, it is a fictional data set created by IBM data scientists.
+First We load the libraries for the functions we will need for the analysis.
+```rlibrary(tidyverse) #load librarieslibrary(mosaic)library(ggthemes)library(lubridate)library(fivethirtyeight)library(here)library(skimr)library(janitor)library(vroom)library(tidyquant)library(kableExtra)library(broom)library(GGally)library(huxtable)options(scipen=200)#load data from csvhr_dataset &amp;lt;- read_csv(here::here(&amp;quot;data&amp;quot;, &amp;quot;datasets_1067_1925_WA_Fn-UseC_-HR-Employee-Attrition.</description>
+    </item>
+    
+    <item>
       <title>Tempus</title>
       <link>/blogs/tempus/</link>
       <pubDate>Tue, 31 Oct 2017 22:26:13 -0500</pubDate>
