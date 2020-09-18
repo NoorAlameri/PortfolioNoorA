@@ -9,7 +9,7 @@ description: Example data from IBM for data analysis of HR
 image: pic07.jpg
 keywords: ""
 slug: blog7
-title: "social media survey"
+title: ""
 ---
 
 
@@ -29,8 +29,8 @@ library(broom)
 library(GGally)
 library(infer)
 library(huxtable)
-```
 
+```
 
 # General Social Survey (GSS)
 
