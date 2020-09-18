@@ -98,7 +98,7 @@ disqusShortname = ""
       url = "blogs/blog5"
 
     [[params.tiles.showcase]]
-      title = "Tempus"
+      title = "Bikes Analytics"
       subtitle = "Feugiat Amet Tempus"
       image = "pic02.jpg"
       url = "blogs/blog6"
