@@ -1,0 +1,377 @@
+<!DOCTYPE HTML>
+<html>
+
+    <head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<meta name="description" content="Hi! My name is Noor. Welcome to my analytics website!">
+	<meta name="author" content="Noor Alameri">
+	<meta name="generator" content="Hugo 0.74.3" />
+	<title>London bikes analytics &middot; Portfolio website for N Alameri</title>
+	<!-- Stylesheets -->
+	
+	<link rel="stylesheet" href="/css/main.css"/>
+	
+	
+
+	
+
+	<!-- Custom Fonts -->
+	<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+	
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+	<link rel="icon" type="image/x-icon" href="/favicon.ico">
+	
+
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+	<script src="js/ie/html5shiv.js"></script>
+	<script src="js/ie/html5shiv.jsrespond.min.js"></script>
+	<![endif]-->
+</head>
+
+    <body>
+
+    <!-- Wrapper -->
+        <div id="wrapper">
+
+            <!-- Header -->
+    <header id="header" class="alt">
+        <a href="/" class="logo"><strong>Portfolio website for Noor Alameri</strong> <span></span></a>
+        <nav>
+            <a href="#menu">Menu</a>
+        </nav>
+    </header>
+
+<!-- Menu -->
+    <nav id="menu">
+        <ul class="links">
+            
+                <li><a href="/">Home</a></li>
+            
+                <li><a href="/blogs">Blogs</a></li>
+            
+
+        </ul>
+        <ul class="actions vertical">
+            
+                <li><a href="/blogs" class="button special fit">My Projects</a></li>
+            
+            
+        </ul>
+    </nav>
+
+        <!-- Main -->
+            <div id="main" class="alt">
+
+                
+                    <section id="one">
+                        <div class="inner">
+                            <header class="major">
+                                <h1>London bikes analytics</h1>
+                            </header>
+                            
+                                <span class="image main"><img src="/img/blogs/pic07.jpg" alt="" /></span>
+                            
+                            
+
+
+<pre class="r"><code>library(tidyverse)  # Load ggplot2, dplyr, and all the other tidyverse packages</code></pre>
+<pre><code>## -- Attaching packages --------------------------------------------------- tidyverse 1.3.0 --</code></pre>
+<pre><code>## v ggplot2 3.3.2     v purrr   0.3.4
+## v tibble  3.0.3     v dplyr   1.0.2
+## v tidyr   1.1.2     v stringr 1.4.0
+## v readr   1.3.1     v forcats 0.5.0</code></pre>
+<pre><code>## -- Conflicts ------------------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>library(mosaic)</code></pre>
+<pre><code>## Loading required package: lattice</code></pre>
+<pre><code>## Loading required package: ggformula</code></pre>
+<pre><code>## Loading required package: ggstance</code></pre>
+<pre><code>## 
+## Attaching package: &#39;ggstance&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:ggplot2&#39;:
+## 
+##     geom_errorbarh, GeomErrorbarh</code></pre>
+<pre><code>## 
+## New to ggformula?  Try the tutorials: 
+##  learnr::run_tutorial(&quot;introduction&quot;, package = &quot;ggformula&quot;)
+##  learnr::run_tutorial(&quot;refining&quot;, package = &quot;ggformula&quot;)</code></pre>
+<pre><code>## Loading required package: mosaicData</code></pre>
+<pre><code>## Loading required package: Matrix</code></pre>
+<pre><code>## 
+## Attaching package: &#39;Matrix&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:tidyr&#39;:
+## 
+##     expand, pack, unpack</code></pre>
+<pre><code>## Registered S3 method overwritten by &#39;mosaic&#39;:
+##   method                           from   
+##   fortify.SpatialPolygonsDataFrame ggplot2</code></pre>
+<pre><code>## 
+## The &#39;mosaic&#39; package masks several functions from core packages in order to add 
+## additional features.  The original behavior of these functions should not be affected by this.
+## 
+## Note: If you use the Matrix package, be sure to load it BEFORE loading mosaic.
+## 
+## Have you tried the ggformula package for your plots?</code></pre>
+<pre><code>## 
+## Attaching package: &#39;mosaic&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:Matrix&#39;:
+## 
+##     mean</code></pre>
+<pre><code>## The following objects are masked from &#39;package:dplyr&#39;:
+## 
+##     count, do, tally</code></pre>
+<pre><code>## The following object is masked from &#39;package:purrr&#39;:
+## 
+##     cross</code></pre>
+<pre><code>## The following object is masked from &#39;package:ggplot2&#39;:
+## 
+##     stat</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     binom.test, cor, cor.test, cov, fivenum, IQR, median, prop.test,
+##     quantile, sd, t.test, var</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     max, mean, min, prod, range, sample, sum</code></pre>
+<pre class="r"><code>library(ggthemes)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;ggthemes&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:mosaic&#39;:
+## 
+##     theme_map</code></pre>
+<pre class="r"><code>library(lubridate)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;lubridate&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     date, intersect, setdiff, union</code></pre>
+<pre class="r"><code>library(here)</code></pre>
+<pre><code>## here() starts at C:/Users/NOOR/Documents/R/PortfolioNoorA</code></pre>
+<pre class="r"><code>library(skimr)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;skimr&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:mosaic&#39;:
+## 
+##     n_missing</code></pre>
+<pre class="r"><code>library(janitor)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;janitor&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     chisq.test, fisher.test</code></pre>
+<pre class="r"><code>library(httr)
+library(readxl)
+library(vroom)
+library(kableExtra)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;kableExtra&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
+## 
+##     group_rows</code></pre>
+<pre class="r"><code>library(infer)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;infer&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:mosaic&#39;:
+## 
+##     prop_test, t_test</code></pre>
+<p>Recall the TfL data on how many bikes were hired every single day. We can get the latest data by running the following</p>
+<pre class="r"><code>url &lt;- &quot;https://data.london.gov.uk/download/number-bicycle-hires/ac29363e-e0cb-47cc-a97a-e216d900a6b0/tfl-daily-cycle-hires.xlsx&quot;
+
+# Download TFL data to temporary file
+httr::GET(url, write_disk(bike.temp &lt;- tempfile(fileext = &quot;.xlsx&quot;)))</code></pre>
+<pre><code>## Response [https://airdrive-secure.s3-eu-west-1.amazonaws.com/london/dataset/number-bicycle-hires/2020-09-18T09%3A06%3A54/tfl-daily-cycle-hires.xlsx?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAJJDIMAIVZJDICKHA%2F20200918%2Feu-west-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20200918T090954Z&amp;X-Amz-Expires=300&amp;X-Amz-Signature=4cd2e1e45a5e6d288f23c5ccc250f4c1e480cf957cdf5c549128c646dc2d9fa3&amp;X-Amz-SignedHeaders=host]
+##   Date: 2020-09-18 09:10
+##   Status: 200
+##   Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+##   Size: 165 kB
+## &lt;ON DISK&gt;  C:\Users\NOOR\AppData\Local\Temp\Rtmpq8J04G\file3f4412ccbc6.xlsx</code></pre>
+<pre class="r"><code># Use read_excel to read it as dataframe
+bike0 &lt;- read_excel(bike.temp,
+                   sheet = &quot;Data&quot;,
+                   range = cell_cols(&quot;A:B&quot;))
+
+# change dates to get year, month, and week
+bike &lt;- bike0 %&gt;% 
+  clean_names() %&gt;% 
+  rename (bikes_hired = number_of_bicycle_hires) %&gt;% 
+  mutate (year = year(day),
+          month = lubridate::month(day, label = TRUE),
+          week = isoweek(day))</code></pre>
+<p>We can easily create a facet grid that plots bikes hired by month and year:</p>
+<p>Looking at May and Jun and comparing 2020 with the previous years, we can directly see the impact of the COVID pandemic!</p>
+<p>Original Plot:</p>
+<p>Plot Reproduction:</p>
+<pre class="r"><code># data preparation
+
+expected_rentals_df &lt;- bike %&gt;% 
+  # use years 2015-2019 as reference
+  filter(year %in% 2015:2019) %&gt;% 
+  # calculate expected rentals (per day) per month over all years
+  group_by(month) %&gt;% 
+  summarise(expected_rentals = mean(bikes_hired))</code></pre>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<pre class="r"><code>excess_by_month &lt;- bike %&gt;% 
+  # use years 2015-2019 as reference
+  filter(year %in% 2015:2020) %&gt;% 
+  # calculate actual rentals for each month for every year
+  group_by(year, month) %&gt;% 
+  summarise(actual_rentals = mean(bikes_hired)) %&gt;% 
+  # join the expected rentals per month (over all years)
+  left_join(expected_rentals_df, on = &quot;month&quot;) %&gt;% 
+  # calculate excess_rentals and helper variables for the ribbon
+  mutate(excess_rentals = actual_rentals - expected_rentals,
+         excess_rentals_pos = ifelse(excess_rentals&gt;0, excess_rentals+expected_rentals, expected_rentals),
+         excess_rentals_neg = ifelse(excess_rentals&lt;0, excess_rentals+expected_rentals, expected_rentals))</code></pre>
+<pre><code>## `summarise()` regrouping output by &#39;year&#39; (override with `.groups` argument)</code></pre>
+<pre><code>## Joining, by = &quot;month&quot;</code></pre>
+<pre class="r"><code># plot graph 1
+ggplot(excess_by_month, aes(x = month)) +
+  # add line for expected rentals (same for all years)
+  geom_line(aes(y = expected_rentals), group = 1, size = 1, color = &quot;blue&quot;) +
+  # add black line for actual rentals 
+  geom_line(aes(y = actual_rentals), group = 1, color = &quot;black&quot;) +
+  # add red and green ribbons
+  geom_ribbon(aes(ymin = expected_rentals, ymax = excess_rentals_pos, group = 1), fill = &quot;green4&quot;, alpha = 0.2) +
+  geom_ribbon(aes(ymin = expected_rentals, ymax = excess_rentals_neg, group = 1), fill = &quot;red3&quot;, alpha = 0.2) +
+  # faceting by year
+  facet_wrap(~year) +
+  theme_minimal() +
+  # use specific breaks
+  scale_y_continuous(breaks = c(20000, 25000, 30000, 35000, 40000)) +
+  labs(y = &quot;Bike rentals&quot;,
+       x = &quot;&quot;,
+       title = &quot;Monthly changes in TfL bike rentals&quot;,
+       subtitle = &quot;Change from monthly average shown in blue \nand calculated between 2015-2019&quot;,
+       caption = &quot;Source: TfL, London Data Store&quot;) +
+  theme(axis.text = element_text(size = 12), # changes size of axis labels,
+        axis.title = element_text(size = 15), # changes size of axis titles,
+        strip.text = element_text(size = 13), # change size of facet titles
+        plot.subtitle = element_text(size = 15), # change size of plot subtitle
+        plot.caption = element_text(size = 12), # change size of plot caption
+        plot.title = element_text(size = 18)) # change size of plot title</code></pre>
+<p><img src="/blogs/blog6_files/figure-html/monthly_changes-1.png" width="1440" /></p>
+<p>Original Plot:</p>
+<p>Plot Reproduction:</p>
+<pre class="r"><code># data preparation
+
+expected_rentals_df_2 &lt;- bike %&gt;% 
+  # use years 2015-2019 as reference
+  filter(year %in% 2015:2019) %&gt;% 
+  # calculate expected rentals (per day) per week over all years
+  group_by(week) %&gt;% 
+  summarise(expected_rentals = mean(bikes_hired))</code></pre>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<pre class="r"><code>excess_by_week &lt;- bike %&gt;% 
+  # use years 2015-2019 as reference
+  filter(year %in% 2015:2020) %&gt;% 
+  # calculate actual rentals for each week for every year
+  group_by(year, week) %&gt;% 
+  summarise(actual_rentals = mean(bikes_hired)) %&gt;% 
+  # join the expected rentals per week (over all years)
+  left_join(expected_rentals_df_2, on = &quot;week&quot;) %&gt;% 
+  # calculate excess_rentals, % change from weekly averages and helper variables for the ribbon and the rugs
+  mutate(excess_rentals = actual_rentals - expected_rentals,
+         perc_change = excess_rentals / expected_rentals,
+         perc_chane_pos = ifelse(perc_change&gt;0, perc_change, 0),
+         perc_chane_neg = ifelse(perc_change&lt;0, perc_change, 0),
+         pos_neg = factor(ifelse(perc_change &gt; 0, 1, 0)))</code></pre>
+<pre><code>## `summarise()` regrouping output by &#39;year&#39; (override with `.groups` argument)</code></pre>
+<pre><code>## Joining, by = &quot;week&quot;</code></pre>
+<pre class="r"><code># plot graph 2
+ggplot(excess_by_week, aes(x = week)) +
+  # add grey shaded rectangles
+  geom_tile(aes(x = 19.5, width = 13, y = 0, height = Inf), alpha = 0.01, fill = &quot;gray78&quot;) +
+  # add grey shaded rectangles
+  geom_tile(aes(x = 46, width = 14, y = 0, height = Inf), alpha = 0.01, fill = &quot;gray78&quot;) +
+  # add black line for percentage change
+  geom_line(aes(y = perc_change), group = 1, color = &quot;black&quot;) +
+  # add rugs at the bottom
+  geom_rug(aes(color = pos_neg)) +
+  # add red and green ribbons
+  geom_ribbon(aes(ymin = 0, ymax = perc_chane_pos, group = 1), fill = &quot;green4&quot;, alpha = 0.2) +
+  geom_ribbon(aes(ymin = perc_chane_neg, ymax = 0, group = 1), fill = &quot;red3&quot;, alpha = 0.2) +
+  # faceting by year
+  facet_wrap(~year) +
+  theme_minimal() +
+  # use specific breaks
+  scale_y_continuous(labels = scales::percent, breaks = c(-0.6, -0.3, 0, 0.3, 0.6), minor_breaks = c(-0.45, -0.15, 0.15, 0.45)) +
+  scale_x_continuous(breaks = c(13, 26, 39, 53), minor_breaks = c(0, 6.5, 19.5, 32.5, 45.5)) +
+  scale_color_manual(values=c(&quot;red3&quot;, &quot;green4&quot;)) + # change colors of rugs
+  theme(legend.position = &quot;none&quot;) + # without legend
+  labs(y = &quot;&quot;,
+       x = &quot;week&quot;,
+       title = &quot;Weekly changes in TfL bike rentals&quot;,
+       subtitle = &quot;% change from weekly averages \ncalculated between 2015-2019&quot;,
+       caption = &quot;Source: TfL, London Data Store&quot;) +
+  theme(axis.text = element_text(size = 12), # changes size of axis labels,
+        axis.title = element_text(size = 15), # changes size of axis titles,
+        strip.text = element_text(size = 13), # change size of facet titles
+        panel.grid.minor = element_line(colour = &quot;gray90&quot;), # change color of minor grid
+        panel.grid.major = element_line(colour = &quot;gray90&quot;), # change color of major grid
+        plot.subtitle = element_text(size = 15), # change size of plot subtitle
+        plot.caption = element_text(size = 12), # change size of plot caption
+        plot.title = element_text(size = 18)) # change size of plot title</code></pre>
+<p><img src="/blogs/blog6_files/figure-html/weekly_changes-1.png" width="1440" /></p>
+
+                        </div>
+                    </section>
+            <!-- Disqus Inject -->
+                
+            </div>
+            
+        <!-- Footer -->
+            
+                <!-- Footer -->
+    <footer id="footer">
+        <div class="inner">
+            <ul class="icons">
+                
+                    <li><a href="" class="icon alt " target="_blank"><span class="label"></span></a></li>
+                
+                    <li><a href="" class="icon alt " target="_blank"><span class="label"></span></a></li>
+                
+                    <li><a href="" class="icon alt " target="_blank"><span class="label"></span></a></li>
+                
+                    <li><a href="https://github.com/NoorAlameri" class="icon alt fa-github" target="_blank"><span class="label">GitHub</span></a></li>
+                
+                    <li><a href="https://www.linkedin.com/in/nooralameri/" class="icon alt fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
+                
+            </ul>
+            <ul class="copyright">
+                <li>&copy; LBS</li>
+                
+                <li>Design:  <a href="https://www.html5up.net">HTML5 UP</a></li>
+                
+            </ul>
+        </div>
+    </footer>
+
+            
+        </div>
+
+    <!-- Scripts -->
+        <!-- Scripts -->
+    <!-- jQuery -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.scrolly.min.js"></script>
+    <script src="/js/jquery.scrollex.min.js"></script>
+    <script src="/js/skel.min.js"></script>
+    <script src="/js/util.js"></script>
+
+    
+
+    <!-- Main JS -->
+    <script src="/js/main.js"></script>
+
+    
+
+    
+
+    </body>
+</html>
