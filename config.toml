@@ -99,13 +99,13 @@ disqusShortname = ""
 
     [[params.tiles.showcase]]
       title = "Bikes Analytics"
-      subtitle = "Feugiat Amet Tempus"
+      subtitle = "Bike usage in the city of London"
       image = "pic02.jpg"
       url = "blogs/blog6"
 
     [[params.tiles.showcase]]
       title = "Social media survey"
-      subtitle = "Lorem Etiam Nullam"
+      subtitle = "Instagram, Twitter, Snapchat and Email"
       image = "pic03.jpg"
       url = "blogs/blog7"
 
