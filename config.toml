@@ -81,9 +81,9 @@ disqusShortname = ""
   [params.banner]
     # To change the background image on the homepage banner, replace 'banner.jpg' in
     # the 'static/img' folder.
-    title = "Hi, my name is Noor"
-    #subtitle = "A RESPONSIVE SITE TEMPLATE DESIGNED BY HTML5 UP\nAND RELEASED UNDER THE CREATIVE COMMONS."
-    buttonText = "Get Started"
+    title = "Hi, My name is Noor(Light)." 
+    subtitle = " Welcome to my data analytics website!"
+    buttonText = "Let's get analyzing!"
 
 
   # Tiles Section
@@ -106,7 +106,7 @@ disqusShortname = ""
     [[params.tiles.showcase]]
       title = "Social media survey"
       subtitle = "Instagram, Twitter, Snapchat and Email"
-      image = "pic03.jpg"
+      image = "image12.jpg"
       url = "blogs/blog7"
 
     #[[params.tiles.showcase]]
@@ -201,9 +201,9 @@ disqusShortname = ""
       #label = "Facebook"
 
     [[params.footer.social]]
-     # icon = "fa-instagram"
-     # url= "https://www.instagram.com"
-     # label = "Instagram"
+      icon = "fa-instagram"
+      url= "https://www.instagram.com/noor.ala_/?hl=en"
+      label = "Instagram"
     
     [[params.footer.social]]
       icon = "fa-github"

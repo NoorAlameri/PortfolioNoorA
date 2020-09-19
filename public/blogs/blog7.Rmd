@@ -30,3 +30,282 @@ library(GGally)
 
 library(huxtable)
 ```
+
+The [General Social Survey (GSS)](http://www.gss.norc.org/) gathers data on American society in order to monitor and explain trends in attitudes, behaviours, and attributes. Many trends have been tracked for decades, so one can see the evolution of attitudes, etc in American Society.
+
+Let's load this intersting data for the year 2016:
+
+```{r read_gss_data, cache=TRUE}
+gss <- read_csv(here::here("data", "smallgss2016.csv"), 
+                na = c("", "Don't know",
+                       "No answer", "Not applicable", "NA"))
+```
+
+The variables we have in our data are the following:
+
+- hours and minutes spent on email weekly. The responses to these questions are recorded in the `emailhr` and `emailmin` variables.
+- `snapchat`, `instagrm`, `twitter`: whether respondents used these social media (in 2016)
+- `sex`: Female or Male
+- `degree`: highest education level attained
+
+## Instagram and Snapchat, by sex
+
+We will now estimate the *population* proportion of Snapchat or Instagram users in 2016:
+
+```{r snap_insta_df}
+
+# calculate snap_insta, that measures Instagram and Snapchat use in combination
+snap_insta_df <- gss %>%
+  # "Yes" if the respondent reported using any of snapchat or instagrm, and "No" if not. If both NA then also NA.
+  mutate(snap_insta = case_when(snapchat == "Yes" | instagrm == "Yes" ~ "Yes",
+                                is.na(snapchat) & is.na(instagrm) ~ NA_character_ ,
+                                TRUE ~ "No")
+         )
+
+# print overall proportion
+snap_insta_df %>%
+  summarise(`number of instagram/ snapchat users` = count(snap_insta == "Yes"),
+            `number of people who use neither` = count(snap_insta == "No"),
+            `proportion of instagram/ snapchat users` = count(snap_insta == "Yes")/count(snap_insta %in% c("Yes","No"))) %>%
+  kbl() %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive")) # have a nice HTML table
+
+```
+
+Hence, our best guess is that overall 37.5% of the whole population use instagram, snapchat, or both.
+
+But it's always better to not always look at point estimates, but at confidence intervals. As we are also interested in the difference between men and women, we calculate two CIs - on for men, one for women - for the snapchat / instagram proportion with traditional mathematical formulas:
+
+```{r snap_insta_CI}
+
+# calculate CIs for men and women
+sex_formula_ci <- snap_insta_df %>%
+  filter(!is.na(snap_insta)) %>% 
+  group_by(sex) %>%  # group by sex and calculate CIs
+  summarise(`proportion of instagram/ snapchat users` = count(snap_insta == "Yes")/count(snap_insta %in% c("Yes","No")),
+            z_critical = qnorm(0.975),
+            count = n(),
+            # Confidence Interval for proportion = p  +/-  z*(√p(1-p) / n)
+            se_proportion = sqrt((`proportion of instagram/ snapchat users`*(1-`proportion of instagram/ snapchat users`))/count),
+            margin_of_error = z_critical * se_proportion,
+            `lower bound` = `proportion of instagram/ snapchat users` - margin_of_error,
+            `upper bound` = `proportion of instagram/ snapchat users` + margin_of_error
+  )
+
+
+# print table with CIs
+sex_formula_ci %>%
+  select(sex, `lower bound`, `proportion of instagram/ snapchat users`, `upper bound`) %>% # only show relevant columns
+  kbl(caption = "confidence interval on proportion of instagram/snapchat users by sex") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive")) # have a nice HTML table
+
+# plot CIs
+ggplot(sex_formula_ci, aes(y=sex, x = `proportion of instagram/ snapchat users`, group = sex, color=sex)) +
+  #draws the means
+  geom_point(size = 5) +
+  #draws the CI error bars
+  geom_errorbar(aes(xmin=`lower bound`, xmax=`upper bound`), width=.1, size = 2) +
+  theme_bw() +
+  theme(legend.position = "none")+
+  labs(title = "Women Spend More Hours on Social Media",
+       subtitle = "Confidence Intervals of Instagram/Snapchat Usage")
+
+```
+
+We can clearly see that the data supports the view that many more women use instagram and snapchat than men do!
+
+## Twitter, by education level
+
+Wait, there is a another social media, for which we have data! Let's have a look at Twitter! What do you think bachelor and graduate students' usage of Twitter would be?
+
+To find out, we have to clean the data first. 
+
+First, let's turn `degree` from a character variable into a factor variable, in ascending order of years of education (Lt high school, High School, Junior college, Bachelor, Graduate). 
+
+We then create a new variable, `bachelor_graduate`, that is *Yes* if the respondent has either a `Bachelor` or `Graduate` degree, in order to distinguish bachelor/graduate students from others.
+
+
+```{r gss_modify}
+
+# #inspect distinct value of degree
+# gss %>%
+#   select(degree) %>%
+#   distinct(degree)
+
+gss_modify <- gss %>%
+  # make degree a factor with the right ordering
+  mutate(degree = factor(degree,level=c("Lt high school",
+                                        "High school",
+                                        "Junior college",
+                                        "Bachelor",
+                                        "Graduate")),
+         # create bachelor_graduate variable
+         bachelor_graduate = case_when(degree %in% c("Bachelor","Graduate") ~ "Yes",
+                                       is.na(degree) ~ NA_character_,
+                                       TRUE ~ "No")
+         )
+
+```
+
+Third, let's calculate the overall proportion of Twitter users:
+
+```{r bachelor_graduate_prop_2}
+
+gss_modify %>% 
+  # drop observations that miss information
+  drop_na(c(bachelor_graduate,twitter)) %>% 
+  # calculate overall Twitter proportion
+  summarise(`people who use Twitter` = count(twitter == "Yes"),
+            `people who don't use Twitter` = count(twitter == "No"),
+            `proportion of those who use Twitter` = `people who use Twitter` / (`people who use Twitter` + `people who don't use Twitter`),
+            `proportion of those who don't use Twitter` = 1 - `proportion of those who use Twitter`) %>%
+  kbl(caption = "Overall Proportion of Twitter users") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive")) # have a nice HTML table
+
+```
+Let's now bring in our newly created variable `bachelor_graduate` and see how Twitter usage varies between those with a degree vs those without a degree:
+
+
+```{r bachelor_graduate_prop}
+
+gss_modify %>% 
+  # drop observations that miss information
+  drop_na(c(bachelor_graduate,twitter)) %>% 
+  group_by(bachelor_graduate) %>% # group by bachelor_graduate and calculate proportions of Twitter users
+  rename(`have a higher educational degree?` = bachelor_graduate) %>% # have a readable name
+  summarise(`people who use Twitter` = count(twitter == "Yes"),
+            `people who don't use Twitter` = count(twitter == "No"),
+            `proportion of those who use Twitter` = `people who use Twitter` / (`people who use Twitter` + `people who don't use Twitter`),
+            `proportion of those who don't use Twitter` = 1 - `proportion of those who use Twitter`) %>%
+  kbl(caption = "Overall Proportion of Twitter users by education level") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive")) # have a nice HTML table
+
+```
+
+We see that students with a degree use Twitter more. But how about the confidence intervals?
+
+Using the CI formula for proportions, let's construct two 95% CIs for `bachelor_graduate` vs whether they use (Yes) and don't (No) use twitter. 
+
+```{r bachelor_graduate_ci}
+
+bachelor_graduate_formula_ci <- gss_modify %>%
+  # drop observations that miss information
+  drop_na(c(bachelor_graduate, twitter)) %>% 
+  group_by(bachelor_graduate) %>% # group by bachelor_graduate and calculate CIs
+  # Confidence Interval = p  +/-  z*(√p(1-p) / n)
+  summarise(`proportion of twitter users` = count(twitter == "Yes") / count(twitter %in% c("Yes","No")),
+            z_critical = qnorm(0.975),
+            count = n(),
+            se_proportion = sqrt((`proportion of twitter users`*(1-`proportion of twitter users`))/count),
+            margin_of_error = z_critical * se_proportion,
+            `lower CI bound` = `proportion of twitter users` - margin_of_error,
+            `upper CI bound` = `proportion of twitter users` + margin_of_error
+  )
+
+# print out CIs
+bachelor_graduate_formula_ci %>%
+  select(bachelor_graduate, `lower CI bound`, `proportion of twitter users`, `upper CI bound`) %>% # only show relevant columns
+  rename(`have a higher educational degree?` = bachelor_graduate) %>% # have readable names
+  kbl(caption = "Confidence Intervals for Twitter usage") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive")) # have a nice HTML table
+
+# plot CIs
+ggplot(bachelor_graduate_formula_ci, aes(y=bachelor_graduate, 
+                                         x = `proportion of twitter users`, 
+                                         group = bachelor_graduate, 
+                                         color=bachelor_graduate)) +
+  #draws the means
+  geom_point(size = 5) +
+  #draws the CI error bars
+  geom_errorbar(aes(xmin=`lower CI bound`, xmax=`upper CI bound`), width=.1, size = 2) +
+  theme_bw() +
+  theme(legend.position = "none") +
+  labs(y = "have a higher educational degree?",
+       x = "Proportion of Twitter users",
+       title = "People with a higher education degree use Twitter more!")
+
+```
+The confidence interval for the proportion of Twitter usage is [13.6%, 18.4%] for those who do not have a degree, vs [19.6%, 27.1%] for thos who have a degree. They do not overlap.
+
+Obviously, more bachelor/graduate student are using Twitter! Are you the majority?
+
+## Email usage
+
+Finally, we also want to have a look at the time people spend on email. How many minutes the respondents spend on email weekly?
+
+```{r email_time}
+
+gss <- gss %>% 
+  # calculate new variable `email` (notice that either both or non of `emailhr` and `emailmin` are NA!)
+  mutate(email = 60*emailhr + emailmin)
+
+email_summary_statistics <- gss %>% 
+  summarise(mean = mean(email, na.rm = TRUE), median = median(email, na.rm = TRUE))
+
+# visualise distribution and mean and median
+gss %>% 
+  ggplot(aes(x = email)) +
+  geom_histogram(binwidth = 30) + # binwidth is 30 min
+  theme_bw() +
+  # add median and mean lines
+  geom_vline(aes(xintercept = email_summary_statistics$median, colour = 'median'), linetype = 2, size = 1) +
+  geom_vline(aes(xintercept = email_summary_statistics$mean, colour = 'mean'), linetype = 2, size = 1) +
+  # change color of lines
+  scale_color_manual(name = NULL, values = c(median = "red", mean = "blue")) +
+  # show median in legend before mean
+  guides(color = guide_legend(reverse = TRUE)) +
+  labs(x = "email usage in minutes per week",
+       title = "Distribution of Email Usage")
+
+```
+
+As shown in the graph, we deal with a right skewed (unbalanced, lopsided) distribution, where the mean is farther out in the long tail than is the median.
+
+Therefore the median is usually preferred to other measures of central tendency when your data set is skewed. The median is a better measure of the typical amount of time Americans spend on email weekly.
+
+How about the confidence interval of email usage? Let's take a look.
+
+```{r email_boot_ci}
+
+# seed set above
+
+# bootstrap for MEAN email minutes
+boot_email <- gss %>%
+  # Specify the variable of interest
+  specify(response = email) %>%
+  
+  # Generate a bunch of bootstrap samples
+  generate(reps = 1000, type = "bootstrap") %>%
+  
+  # Find the median of each sample
+  calculate(stat = "mean")
+
+percentile_ci <- boot_email %>%
+  get_ci(level = 0.95, type = "percentile")
+
+# print confidence interval
+percentile_ci %>% 
+  mutate(lower_emailhr = lower_ci %/% 60, 
+         lower_emailmin = round(lower_ci %% 60),
+         upper_emailhr = upper_ci %/% 60, 
+         upper_emailmin = round(upper_ci %% 60),
+         `lower bound of average email usage` = paste(lower_emailhr, "hr, ", lower_emailmin, "min"),
+         `upper bound of average email usage` = paste(upper_emailhr, "hr, ", upper_emailmin, "min")) %>% 
+  select(`lower bound of average email usage`, `upper bound of average email usage`) %>% # only show relevant columns
+  kbl(caption = "Confidence interval for weekly email usage") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive")) # have a nice HTML table
+
+# visualise confidence interval
+ggplot(boot_email, aes(x = stat)) +
+  geom_histogram(bins = 20) +
+  labs(title= "Bootstrap distribution of means") +
+  geom_vline(xintercept = percentile_ci$lower_ci, colour = 'orange', linetype = 2, size = 1.2) +
+  geom_vline(xintercept = percentile_ci$upper_ci, colour = 'orange', linetype = 2, size = 1.2) +
+  theme_bw()
+
+```
+
+We can find the confidence interval of weekly time spend on email under 95% is [6 hr 26 min, 7 hr 30 min]. Americans spend around 1 hour per day on email!
+However, as we have seen in the distribution plot, this is probably only due to some people spending the whole day emailing, while others only check their mails once in a while. 
+
+We would expect a 99% confidence interval to be wider than the interval calculated because to be more confident that the true population value falls within the interval we will need to allow more potential values within the interval.
