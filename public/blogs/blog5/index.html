@@ -8,7 +8,7 @@
 	<meta name="description" content="Hi! My name is Noor. Welcome to my analytics website!">
 	<meta name="author" content="Noor Alameri">
 	<meta name="generator" content="Hugo 0.74.3" />
-	<title> &middot; Portfolio website for N Alameri</title>
+	<title>HR analytics &middot; Portfolio website for N Alameri</title>
 	<!-- Stylesheets -->
 	
 	<link rel="stylesheet" href="/css/main.css"/>
@@ -71,229 +71,315 @@
                     <section id="one">
                         <div class="inner">
                             <header class="major">
-                                <h1></h1>
+                                <h1>HR analytics</h1>
                             </header>
                             
                                 <span class="image main"><img src="/img/blogs/pic07.jpg" alt="" /></span>
                             
                             
+<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+<link href="/rmarkdown-libs/lightable/lightable.css" rel="stylesheet" />
 
 
-<hr />
-<p>categories:
-- ""
-- ""
-date: “2017-10-31T22:42:51-05:00”
-description: Example data from IBM for data analysis of HR
-image: pic07.jpg
-keywords: ""
-slug: blog5
-title: ""
-—</p>
-<pre class="r"><code>library(tidyverse) #load libraries</code></pre>
-<pre><code>## -- Attaching packages --------------------------------------------------- tidyverse 1.3.0 --</code></pre>
-<pre><code>## v ggplot2 3.3.2     v purrr   0.3.4
-## v tibble  3.0.3     v dplyr   1.0.2
-## v tidyr   1.1.2     v stringr 1.4.0
-## v readr   1.3.1     v forcats 0.5.0</code></pre>
-<pre><code>## -- Conflicts ------------------------------------------------------ tidyverse_conflicts() --
-## x dplyr::filter() masks stats::filter()
-## x dplyr::lag()    masks stats::lag()</code></pre>
-<pre class="r"><code>library(mosaic)</code></pre>
-<pre><code>## Loading required package: lattice</code></pre>
-<pre><code>## Loading required package: ggformula</code></pre>
-<pre><code>## Loading required package: ggstance</code></pre>
-<pre><code>## 
-## Attaching package: &#39;ggstance&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:ggplot2&#39;:
-## 
-##     geom_errorbarh, GeomErrorbarh</code></pre>
-<pre><code>## 
-## New to ggformula?  Try the tutorials: 
-##  learnr::run_tutorial(&quot;introduction&quot;, package = &quot;ggformula&quot;)
-##  learnr::run_tutorial(&quot;refining&quot;, package = &quot;ggformula&quot;)</code></pre>
-<pre><code>## Loading required package: mosaicData</code></pre>
-<pre><code>## Loading required package: Matrix</code></pre>
-<pre><code>## 
-## Attaching package: &#39;Matrix&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:tidyr&#39;:
-## 
-##     expand, pack, unpack</code></pre>
-<pre><code>## Registered S3 method overwritten by &#39;mosaic&#39;:
-##   method                           from   
-##   fortify.SpatialPolygonsDataFrame ggplot2</code></pre>
-<pre><code>## 
-## The &#39;mosaic&#39; package masks several functions from core packages in order to add 
-## additional features.  The original behavior of these functions should not be affected by this.
-## 
-## Note: If you use the Matrix package, be sure to load it BEFORE loading mosaic.
-## 
-## Have you tried the ggformula package for your plots?</code></pre>
-<pre><code>## 
-## Attaching package: &#39;mosaic&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:Matrix&#39;:
-## 
-##     mean</code></pre>
-<pre><code>## The following objects are masked from &#39;package:dplyr&#39;:
-## 
-##     count, do, tally</code></pre>
-<pre><code>## The following object is masked from &#39;package:purrr&#39;:
-## 
-##     cross</code></pre>
-<pre><code>## The following object is masked from &#39;package:ggplot2&#39;:
-## 
-##     stat</code></pre>
-<pre><code>## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     binom.test, cor, cor.test, cov, fivenum, IQR, median, prop.test,
-##     quantile, sd, t.test, var</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     max, mean, min, prod, range, sample, sum</code></pre>
-<pre class="r"><code>library(ggthemes)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;ggthemes&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:mosaic&#39;:
-## 
-##     theme_map</code></pre>
-<pre class="r"><code>library(lubridate)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;lubridate&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     date, intersect, setdiff, union</code></pre>
-<pre class="r"><code>library(fivethirtyeight)</code></pre>
-<pre><code>## Some larger datasets need to be installed separately, like senators and
-## house_district_forecast. To install these, we recommend you install the
-## fivethirtyeightdata package by running:
-## install.packages(&#39;fivethirtyeightdata&#39;, repos =
-## &#39;https://fivethirtyeightdata.github.io/drat/&#39;, type = &#39;source&#39;)</code></pre>
-<pre class="r"><code>library(here)</code></pre>
-<pre><code>## here() starts at C:/Users/NOOR/Documents/R/PortfolioNoorA</code></pre>
-<pre class="r"><code>library(skimr)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;skimr&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:mosaic&#39;:
-## 
-##     n_missing</code></pre>
-<pre class="r"><code>library(janitor)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;janitor&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     chisq.test, fisher.test</code></pre>
-<pre class="r"><code>library(vroom)
-library(tidyquant)</code></pre>
-<pre><code>## Loading required package: PerformanceAnalytics</code></pre>
-<pre><code>## Loading required package: xts</code></pre>
-<pre><code>## Loading required package: zoo</code></pre>
-<pre><code>## 
-## Attaching package: &#39;zoo&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     as.Date, as.Date.numeric</code></pre>
-<pre><code>## 
-## Attaching package: &#39;xts&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:dplyr&#39;:
-## 
-##     first, last</code></pre>
-<pre><code>## 
-## Attaching package: &#39;PerformanceAnalytics&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:graphics&#39;:
-## 
-##     legend</code></pre>
-<pre><code>## Loading required package: quantmod</code></pre>
-<pre><code>## Loading required package: TTR</code></pre>
-<pre><code>## Registered S3 method overwritten by &#39;quantmod&#39;:
-##   method            from
-##   as.zoo.data.frame zoo</code></pre>
-<pre><code>## Version 0.4-0 included new data defaults. See ?getSymbols.</code></pre>
-<pre><code>## == Need to Learn tidyquant? ================================================================
-## Business Science offers a 1-hour course - Learning Lab #9: Performance Analysis &amp; Portfolio Optimization with tidyquant!
-## &lt;/&gt; Learn more at: https://university.business-science.io/p/learning-labs-pro &lt;/&gt;</code></pre>
-<pre class="r"><code>library(kableExtra)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;kableExtra&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
-## 
-##     group_rows</code></pre>
-<pre class="r"><code>library(broom)
-library(GGally)</code></pre>
-<pre><code>## Registered S3 method overwritten by &#39;GGally&#39;:
-##   method from   
-##   +.gg   ggplot2</code></pre>
-<pre class="r"><code>library(huxtable)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;huxtable&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:GGally&#39;:
-## 
-##     wrap</code></pre>
-<pre><code>## The following object is masked from &#39;package:kableExtra&#39;:
-## 
-##     add_footnote</code></pre>
-<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
-## 
-##     add_rownames</code></pre>
-<pre><code>## The following object is masked from &#39;package:ggplot2&#39;:
-## 
-##     theme_grey</code></pre>
+<p>For this analysis, I have taken a data set on Human Resrouce Analytics from the <a href="https://www.kaggle.com/pavansubhasht/ibm-hr-analytics-attrition-dataset">IBM HR Analytics Employee Attrition &amp; Performance data set</a>, it is a fictional data set created by IBM data scientists.</p>
+<p>First We load the libraries for the functions we will need for the analysis.</p>
+<pre><code>
+```r
+library(tidyverse) #load libraries
+library(mosaic)
+library(ggthemes)
+library(lubridate)
+library(fivethirtyeight)
+library(here)
+library(skimr)
+library(janitor)
+library(vroom)
+library(tidyquant)
+library(kableExtra)
+library(broom)
+library(GGally)
 
-                        </div>
-                    </section>
-            <!-- Disqus Inject -->
-                
-            </div>
-            
-        <!-- Footer -->
-            
-                <!-- Footer -->
-    <footer id="footer">
-        <div class="inner">
-            <ul class="icons">
-                
-                    <li><a href="" class="icon alt " target="_blank"><span class="label"></span></a></li>
-                
-                    <li><a href="" class="icon alt " target="_blank"><span class="label"></span></a></li>
-                
-                    <li><a href="https://www.instagram.com/noor.ala_/?hl=en" class="icon alt fa-instagram" target="_blank"><span class="label">Instagram</span></a></li>
-                
-                    <li><a href="https://github.com/NoorAlameri" class="icon alt fa-github" target="_blank"><span class="label">GitHub</span></a></li>
-                
-                    <li><a href="https://www.linkedin.com/in/nooralameri/" class="icon alt fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
-                
-            </ul>
-            <ul class="copyright">
-                <li>&copy; LBS</li>
-                
-                <li>Design:  <a href="https://www.html5up.net">HTML5 UP</a></li>
-                
-            </ul>
-        </div>
-    </footer>
+library(huxtable)
 
-            
-        </div>
 
-    <!-- Scripts -->
-        <!-- Scripts -->
-    <!-- jQuery -->
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/jquery.scrolly.min.js"></script>
-    <script src="/js/jquery.scrollex.min.js"></script>
-    <script src="/js/skel.min.js"></script>
-    <script src="/js/util.js"></script>
+options(scipen=200)
 
-    
-
-    <!-- Main JS -->
-    <script src="/js/main.js"></script>
-
-    
-
-    
-
-    </body>
-</html>
+#load data from csv
+hr_dataset &lt;- read_csv(here::here(&quot;data&quot;, &quot;datasets_1067_1925_WA_Fn-UseC_-HR-Employee-Attrition.csv&quot;))</code></pre>
+<p>Next, I will clean the data so that the values are strings with correct names rather than numerical outputs.</p>
+<pre class="r"><code>hr_cleaned &lt;- hr_dataset %&gt;% 
+  clean_names() %&gt;% #here we clean the data set and 
+  mutate(  
+    education = case_when(     
+      education == 1 ~ &quot;Below College&quot;, #here we assign the number values to strings with                                                 the name of the level of education.
+      education == 2 ~ &quot;College&quot;,
+      education == 3 ~ &quot;Bachelor&quot;,
+      education == 4 ~ &quot;Master&quot;,
+      education == 5 ~ &quot;Doctor&quot;
+    ),
+    environment_satisfaction = case_when(
+      environment_satisfaction == 1 ~ &quot;Low&quot;,#here we assign the number values to strings with                                                 according to level of satisfaction.
+      environment_satisfaction == 2 ~ &quot;Medium&quot;,
+      environment_satisfaction == 3 ~ &quot;High&quot;,
+      environment_satisfaction == 4 ~ &quot;Very High&quot;
+    ),
+    job_satisfaction = case_when(
+      job_satisfaction == 1 ~ &quot;Low&quot;,#here we assign the number values to strings with                                                 according to level of satisfaction.
+      job_satisfaction == 2 ~ &quot;Medium&quot;,
+      job_satisfaction == 3 ~ &quot;High&quot;,
+      job_satisfaction == 4 ~ &quot;Very High&quot;
+    ),
+    performance_rating = case_when(
+      performance_rating == 1 ~ &quot;Low&quot;,
+      performance_rating == 2 ~ &quot;Good&quot;,
+      performance_rating == 3 ~ &quot;Excellent&quot;,
+      performance_rating == 4 ~ &quot;Outstanding&quot;
+    ),
+    work_life_balance = case_when(
+      work_life_balance == 1 ~ &quot;Bad&quot;,
+      work_life_balance == 2 ~ &quot;Good&quot;,#here we assign the number values to strings with                                                 according to level of satisfaction.
+      work_life_balance == 3 ~ &quot;Better&quot;,
+      work_life_balance == 4 ~ &quot;Best&quot;
+    )
+  ) %&gt;% 
+  select(age, attrition, daily_rate, department,#choosing data from original dataset
+         distance_from_home, education,
+         gender, job_role,environment_satisfaction,
+         job_satisfaction, marital_status,
+         monthly_income, num_companies_worked, percent_salary_hike,
+         performance_rating, total_working_years,
+         work_life_balance, years_at_company,
+         years_since_last_promotion)</code></pre>
+<p>I decided to glimpse the data to gain an overview of the dataset and using the <code>skim</code> output, we can see that we are dealing with a nice dataset with no missing values.</p>
+<pre class="r"><code>glimpse(hr_cleaned)#glimpse to get a quick overview of the data</code></pre>
+<pre><code>## Rows: 1,470
+## Columns: 19
+## $ age                        &lt;dbl&gt; 41, 49, 37, 33, 27, 32, 59, 30, 38, 36, ...
+## $ attrition                  &lt;chr&gt; &quot;Yes&quot;, &quot;No&quot;, &quot;Yes&quot;, &quot;No&quot;, &quot;No&quot;, &quot;No&quot;, &quot;N...
+## $ daily_rate                 &lt;dbl&gt; 1102, 279, 1373, 1392, 591, 1005, 1324, ...
+## $ department                 &lt;chr&gt; &quot;Sales&quot;, &quot;Research &amp; Development&quot;, &quot;Rese...
+## $ distance_from_home         &lt;dbl&gt; 1, 8, 2, 3, 2, 2, 3, 24, 23, 27, 16, 15,...
+## $ education                  &lt;chr&gt; &quot;College&quot;, &quot;Below College&quot;, &quot;College&quot;, &quot;...
+## $ gender                     &lt;chr&gt; &quot;Female&quot;, &quot;Male&quot;, &quot;Male&quot;, &quot;Female&quot;, &quot;Mal...
+## $ job_role                   &lt;chr&gt; &quot;Sales Executive&quot;, &quot;Research Scientist&quot;,...
+## $ environment_satisfaction   &lt;chr&gt; &quot;Medium&quot;, &quot;High&quot;, &quot;Very High&quot;, &quot;Very Hig...
+## $ job_satisfaction           &lt;chr&gt; &quot;Very High&quot;, &quot;Medium&quot;, &quot;High&quot;, &quot;High&quot;, &quot;...
+## $ marital_status             &lt;chr&gt; &quot;Single&quot;, &quot;Married&quot;, &quot;Single&quot;, &quot;Married&quot;...
+## $ monthly_income             &lt;dbl&gt; 5993, 5130, 2090, 2909, 3468, 3068, 2670...
+## $ num_companies_worked       &lt;dbl&gt; 8, 1, 6, 1, 9, 0, 4, 1, 0, 6, 0, 0, 1, 0...
+## $ percent_salary_hike        &lt;dbl&gt; 11, 23, 15, 11, 12, 13, 20, 22, 21, 13, ...
+## $ performance_rating         &lt;chr&gt; &quot;Excellent&quot;, &quot;Outstanding&quot;, &quot;Excellent&quot;,...
+## $ total_working_years        &lt;dbl&gt; 8, 10, 7, 8, 6, 8, 12, 1, 10, 17, 6, 10,...
+## $ work_life_balance          &lt;chr&gt; &quot;Bad&quot;, &quot;Better&quot;, &quot;Better&quot;, &quot;Better&quot;, &quot;Be...
+## $ years_at_company           &lt;dbl&gt; 6, 10, 0, 8, 2, 7, 1, 1, 9, 7, 5, 9, 5, ...
+## $ years_since_last_promotion &lt;dbl&gt; 0, 1, 0, 3, 2, 3, 0, 0, 1, 7, 0, 0, 4, 1...</code></pre>
+<pre class="r"><code>skim(hr_cleaned)#make sure the data is free from missing values</code></pre>
+<table style='width: auto;'
+        class='table table-condensed'>
+<caption>
+(#tab:hr_glimpse)Data summary
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Name
+</td>
+<td style="text-align:left;">
+hr_cleaned
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Number of rows
+</td>
+<td style="text-align:left;">
+1470
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Number of columns
+</td>
+<td style="text-align:left;">
+19
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+_______________________
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Column type frequency:
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+character
+</td>
+<td style="text-align:left;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+numeric
+</td>
+<td style="text-align:left;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+________________________
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Group variables
+</td>
+<td style="text-align:left;">
+None
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+skim_variable
+</th>
+<th style="text-align:right;">
+n_missing
+</th>
+<th style="text-align:right;">
+complete_rate
+</th>
+<th style="text-align:right;">
+min
+</th>
+<th style="text-align:right;">
+max
+</th>
+<th style="text-align:right;">
+empty
+</th>
+<th style="text-align:right;">
+n_unique
+</th>
+<th style="text-align:right;">
+whitespace
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+attrition
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+department
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+22
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+education
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+gender
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
 </td>
 <td style="text-align:right;">
 6
