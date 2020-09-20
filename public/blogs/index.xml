@@ -53,6 +53,16 @@ library(tidyverse) # Load ggplot2, dplyr, and all the other tidyverse packages#
     </item>
     
     <item>
+      <title>Social media survey</title>
+      <link>/blogs/blog7/</link>
+      <pubDate>Tue, 31 Oct 2017 22:42:51 -0500</pubDate>
+      
+      <guid>/blogs/blog7/</guid>
+      <description>General Social Survey (GSS)Social media plays a big role in our life. Lets get to understand the demographics of social media users more!The General Social Survey (GSS) gathers data on American society in order to monitor and explain trends in attitudes, behaviours, and attributes. Many trends have been tracked for decades, so one can see the evolution of attitudes, etc in American Society.
+First lets load some libraries:</description>
+    </item>
+    
+    <item>
       <title>Tempus</title>
       <link>/blogs/tempus/</link>
       <pubDate>Tue, 31 Oct 2017 22:26:13 -0500</pubDate>

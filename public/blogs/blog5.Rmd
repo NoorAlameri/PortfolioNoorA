@@ -7,7 +7,7 @@ description: Example data from IBM for data analysis of HR
 image: pic07.jpg
 keywords: ""
 slug: blog5
-title: HR analytics
+title: "HR analytics"
 ---
 
 For this analysis, I have taken a data set on Human Resrouce Analytics from the [IBM HR Analytics Employee Attrition & Performance data set](https://www.kaggle.com/pavansubhasht/ibm-hr-analytics-attrition-dataset), it is a fictional data set created by IBM data scientists.  
