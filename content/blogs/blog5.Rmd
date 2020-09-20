@@ -324,7 +324,7 @@ First, I tried to see the if age was an effecitve factor
 ```{r}
 model_1 <- lm(monthly_income ~ age, data = hr_cleaned) #runs regression model on set variables
 model_1 %>% broom::tidy(conf.int = TRUE) #produces table of statistics
-model_1 %>% broom::glance()#produces table of statistics
+model_1 %>% broom::glance()
 
 ```
 
@@ -335,8 +335,8 @@ Lets try to improve our odds!I am going to try to add another input value.
 ```{r}
 model_2 <- lm(monthly_income ~ age+ years_at_company, data = hr_cleaned) #runs regression model on set variables
 
-model_2 %>% broom::tidy(conf.int = TRUE)#produces table of statistics
-model_2 %>% broom::glance()#produces table of statistics
+model_2 %>% broom::tidy(conf.int = TRUE)#produces table of statistics 
+model_2 %>% broom::glance()#produces table of statistics 
 
 ```
 
@@ -348,8 +348,8 @@ I will add gender to see if it impacts the values from our regression
 
 ```{r}
 model_4 <- lm(monthly_income ~ age+ years_at_company + gender, data = hr_cleaned) #runs regression model on set variables
-model_4 %>% broom::tidy(conf.int = TRUE)#produces table of statistics
-model_4 %>% broom::glance()#produces table of statistics
+model_4 %>% broom::tidy(conf.int = TRUE)#produces table of statistics 
+model_4 %>% broom::glance()#produces table of statistics kbl
 ```
 
 
@@ -360,8 +360,8 @@ Lets remove gender since it is not a useful factor and add job role instead.
 
 ```{r}
 model_4 <- lm(monthly_income ~ age+ years_at_company + job_role, data = hr_cleaned) #runs regression model on set variables
-model_4 %>% broom::tidy(conf.int = TRUE)#produces table of statistics
-model_4 %>% broom::glance()#produces table of statistics
+model_4 %>% broom::tidy(conf.int = TRUE)#produces table of statistics  
+model_4 %>% broom::glance()#produces table of statistics 
 ```
 
 

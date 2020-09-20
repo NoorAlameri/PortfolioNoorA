@@ -5,13 +5,14 @@ categories:
 - ""
 - ""
 date: "2017-10-31T22:42:51-05:00"
-description: Example data from IBM for data analysis of HR
-image: pic07.jpg
+description: image: pic07.jpg
 keywords: ""
-slug: blog7
-title: ""
+slug: blog5
+title: "Social Media"
 ---
+# General Social Survey (GSS)
 
+This Project is on the usage of social media and the demographic of social media users in the USA.
 
 ```{r}
 library(tidyverse) #load libraries
@@ -27,11 +28,11 @@ library(tidyquant)
 library(kableExtra)
 library(broom)
 library(GGally)
-library(infer)
+
 library(huxtable)
 ```
 
-# General Social Survey (GSS)
+
 
 The [General Social Survey (GSS)](http://www.gss.norc.org/) gathers data on American society in order to monitor and explain trends in attitudes, behaviours, and attributes. Many trends have been tracked for decades, so one can see the evolution of attitudes, etc in American Society.
 
